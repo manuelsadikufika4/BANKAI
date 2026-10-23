@@ -1,136 +1,128 @@
-Aqui tens o ficheiro **`README.md`** completo e atualizado para o teu repositório no GitHub, estruturado com badges profissionais, sem emojis e com os devidos créditos ao autor **Manuel Sadi Kufika**:
-
-```markdown
-# BANKAI - Security Framework
+<h1 align="center">BANKAI</h1>
 
 <p align="center">
-  <b>Uma ferramenta modular de auditoria de rede e segurança de alta performance desenvolvida em C.</b>
+  <b>Framework modular de auditoria de rede e segurança, de alta performance, desenvolvida em C.</b>
 </p>
 
 <p align="center">
-  <img src="https://img.shields.io/badge/Language-C-00599C?style=flat&logo=c&logoColor=white" alt="C">
-  <img src="https://img.shields.io/badge/Author-Manuel%20Sadi%20Kufika-blueviolet?style=flat&logo=github&logoColor=white" alt="Author">
-  <img src="https://img.shields.io/badge/License-MIT-green.svg?style=flat&logo=opensourceinitiative&logoColor=white" alt="License">
-  <img src="https://img.shields.io/badge/Platform-Linux%20%2F%20Unix-orange.svg?style=flat&logo=linux&logoColor=white" alt="Platform">
-  <img src="https://img.shields.io/badge/Version-1.0.0-blue?style=flat&logo=semver&logoColor=white" alt="Version">
+  <img src="https://img.shields.io/badge/Language-C-00599C?style=flat&logo=c&logoColor=white" alt="Linguagem C">
+  <img src="https://img.shields.io/badge/Platform-Linux%20%2F%20Unix-orange?style=flat&logo=linux&logoColor=white" alt="Plataforma Linux/Unix">
+  <img src="https://img.shields.io/badge/Version-1.0.0-blue?style=flat&logo=semver&logoColor=white" alt="Versão 1.0.0">
+  <img src="https://img.shields.io/badge/License-MIT-green?style=flat&logo=opensourceinitiative&logoColor=white" alt="Licença MIT">
+  <img src="https://img.shields.io/badge/Author-Manuel%20Sadi%20Kufika-blueviolet?style=flat&logo=github&logoColor=white" alt="Autor">
+</p>
+
+<p align="center">
+  <a href="#sobre">Sobre</a> •
+  <a href="#funcionalidades">Funcionalidades</a> •
+  <a href="#instalação">Instalação</a> •
+  <a href="#utilização">Utilização</a> •
+  <a href="#formato-de-saída-json">Saída JSON</a> •
+  <a href="#estrutura-do-projeto">Estrutura</a> •
+  <a href="#aviso-legal">Aviso Legal</a>
 </p>
 
 ---
 
-## Autor
+## Sobre
 
-* **Manuel Sadi Kufika**
+A **BANKAI** é uma ferramenta de auditoria de segurança orientada a desempenho, construída de raiz em **C**. Inspirada na robustez das ferramentas clássicas de cibersegurança, adota uma **arquitetura estritamente modular**, que separa de forma clara:
 
----
-
-## Sobre a Ferramenta
-
-A **BANKAI** é uma ferramenta de auditoria de segurança orientada a desempenho, construída de raiz em linguagem **C**. Inspirada na robustez de ferramentas clássicas de cibersegurança, a BANKAI adota uma **arquitetura estritamente modular**, separando o escaneamento de portas, a auditoria sem fios (`libpcap`), a exportação de dados estruturados e a gestão dinâmica de argumentos de linha de comandos.
-
----
-
-## Funcionalidades Principais
-
-* **Scanner de Portas TCP Multi-threaded:** Varrimento rápido de portas utilizando sockets de baixo nível e gestão de threads (`pthread`) para máxima eficiência.
-* **Auditoria de Redes Wi-Fi (Beacon Sniffing):** Captura e análise de pacotes de gestão sem fios através da biblioteca `libpcap` em placas configuradas em modo de monitorização.
-* **Deteção Avançada de Segurança:** Identificação automática do tipo de encriptação das redes Wi-Fi próximas, distinguindo redes clássicas **WPA2-AES** de redes modernas **WPA3-Personal (SAE)**.
-* **Exportação JSON Nativa:** Registo automático de todos os resultados (portas abertas, SSIDs, canais e protocolos de segurança) em relatórios estruturados em formato JSON para automação.
+| Módulo | Responsabilidade |
+|---|---|
+| **Port Scanner** | Varrimento de portas TCP com múltiplas threads |
+| **Wi-Fi Audit** | Captura e análise de pacotes de gestão sem fios (`libpcap`) |
+| **Exporter** | Exportação de resultados estruturados em JSON |
+| **CLI** | Gestão dinâmica de argumentos de linha de comandos (`getopt`) |
 
 ---
 
-## Estrutura do Projeto
+## Funcionalidades
 
-```text
-bankai/
-├── include/
-│   ├── bankai.h          # Definições globais
-│   ├── exporter.h        # Protótipos do módulo de exportação JSON
-│   ├── port_scanner.h    # Protótipos do scanner de portas
-│   └── wifi_audit.h      # Protótipos da auditoria Wi-Fi
-├── src/
-│   ├── main.c            # Ponto de entrada e parser de argumentos (getopt)
-│   ├── port_scanner.c    # Implementação do Port Scanner multi-threaded
-│   ├── wifi_audit.c      # Implementação do Packet Sniffer e parser de IEs
-│   └── exporter.c        # Gestão de escrita de relatórios JSON
-└── Makefile              # Automação de compilação
-
-```
+- **Scanner de portas TCP multi-threaded** — varrimento rápido com sockets de baixo nível e gestão de threads POSIX (`pthread`).
+- **Auditoria de redes Wi-Fi (beacon sniffing)** — captura e análise de frames de gestão com `libpcap`, usando placas em modo de monitorização.
+- **Deteção avançada de segurança** — identifica automaticamente o tipo de encriptação das redes próximas, distinguindo **WPA2-AES** de **WPA3-Personal (SAE)**.
+- **Exportação JSON nativa** — regista portas abertas, SSIDs, canais e protocolos de segurança em relatórios estruturados, prontos para automação e integração com outras ferramentas.
 
 ---
 
-## Requisitos e Dependências
+## Requisitos
 
-Para compilar e executar a BANKAI num sistema Linux (Ubuntu/Debian/Kali Linux), necessitas de:
+| Requisito | Descrição |
+|---|---|
+| Sistema operativo | Linux (testado em Ubuntu, Debian e Kali Linux) |
+| Compilador | GCC |
+| Automação | Make |
+| Bibliotecas | `libpcap` (pacote de desenvolvimento) e POSIX Threads (`pthread`) |
+| Hardware (modo Wi-Fi) | Placa de rede sem fios com suporte a modo de monitorização |
 
-* Compilador GCC
-* Make
-* Biblioteca `libpcap` (desenvolvimento)
-* Threads POSIX (`pthread`)
-
-Podes instalar as dependências no Debian/Ubuntu com o seguinte comando:
+Instalação das dependências em Debian/Ubuntu/Kali:
 
 ```bash
 sudo apt update
 sudo apt install build-essential libpcap-dev
-
 ```
 
 ---
 
-## Instalação e Compilação
+## Instalação
 
-1. Clona o repositório para a tua máquina:
+**1. Clonar o repositório**
+
 ```bash
-git clone [https://github.com/O_TEU_UTILIZADOR/bankai.git](https://github.com/O_TEU_UTILIZADOR/bankai.git)
+git clone https://github.com/O_TEU_UTILIZADOR/bankai.git
 cd bankai
-
 ```
 
+**2. Compilar**
 
-2. Compila o projeto utilizando o Makefile:
 ```bash
 make
-
 ```
 
-
-
-Esta operação irá gerar o executável binário `bankai` na pasta raiz.
+O executável `bankai` será gerado na raiz do projeto.
 
 ---
 
-## Como Utilizar
+## Utilização
 
-Executa o comando de ajuda para visualizar todas as opções e modos disponíveis:
+Para consultar todas as opções e modos disponíveis:
 
 ```bash
 ./bankai -h
-
 ```
 
-### 1. Executar Port Scanner TCP
+### Opções
 
-Para varrer as portas padrão (1 a 1024) num alvo autorizado e exportar os resultados para um ficheiro JSON customizado:
+| Opção | Descrição |
+|---|---|
+| `-m <modo>` | Modo de operação: `port` (scanner de portas) ou `wifi` (auditoria Wi-Fi) |
+| `-t <alvo>` | Endereço IP do alvo (modo `port`) |
+| `-i <interface>` | Interface de rede em modo de monitorização (modo `wifi`) |
+| `-o <ficheiro>` | Ficheiro JSON de saída |
+| `-h` | Mostra a ajuda |
+
+### Modo 1 — Port Scanner TCP
+
+Varre as portas padrão (1 a 1024) de um alvo autorizado e exporta os resultados para JSON:
 
 ```bash
 sudo ./bankai -m port -t 192.168.1.1 -o resultados_portas.json
-
 ```
 
-### 2. Executar Auditoria Wi-Fi (Beacon Frames)
+### Modo 2 — Auditoria Wi-Fi (Beacon Frames)
 
-*Nota: Requer que a placa de rede sem fios esteja configurada previamente em modo de monitorização (ex: `wlan0mon`).*
+> **Pré-requisito:** a placa sem fios deve estar previamente configurada em modo de monitorização (ex.: `wlan0mon`).
 
 ```bash
 sudo ./bankai -m wifi -i wlan0mon -o relatorio_wifi.json
-
 ```
 
 ---
 
-## Exemplo de Relatório JSON Gerado
+## Formato de Saída JSON
 
-Os relatórios são salvos num formato estruturado para integração em ferramentas externas:
+Os relatórios são guardados num formato estruturado, adequado a integração com ferramentas externas:
 
 ```json
 [
@@ -147,24 +139,56 @@ Os relatórios são salvos num formato estruturado para integração em ferramen
     "ssid": "Rede_Empresa_Secure",
     "security": "WPA3-Personal (SAE)",
     "channel": 6
-  },
-  {}
+  }
 ]
+```
 
+| Campo | Tipo | Descrição |
+|---|---|---|
+| `tool` | string | Nome da ferramenta (`BANKAI`) |
+| `type` | string | Tipo de registo: `port_scan` ou `wifi_audit` |
+| `target` | string | Alvo analisado (registos `port_scan`) |
+| `port` | inteiro | Porta TCP detetada (registos `port_scan`) |
+| `status` | string | Estado da porta, p. ex. `open` |
+| `ssid` | string | Nome da rede (registos `wifi_audit`) |
+| `security` | string | Protocolo de segurança, p. ex. `WPA2-AES` ou `WPA3-Personal (SAE)` |
+| `channel` | inteiro | Canal Wi-Fi (registos `wifi_audit`) |
+
+---
+
+## Estrutura do Projeto
+
+```text
+bankai/
+├── include/
+│   ├── bankai.h          # Definições globais
+│   ├── exporter.h        # Protótipos do módulo de exportação JSON
+│   ├── port_scanner.h    # Protótipos do scanner de portas
+│   └── wifi_audit.h      # Protótipos da auditoria Wi-Fi
+├── src/
+│   ├── main.c            # Ponto de entrada e parser de argumentos (getopt)
+│   ├── port_scanner.c    # Port Scanner multi-threaded
+│   ├── wifi_audit.c      # Packet sniffer e parser de Information Elements (IEs)
+│   └── exporter.c        # Escrita de relatórios JSON
+└── Makefile              # Automação de compilação
 ```
 
 ---
 
-## Aviso Legal (Disclaimer)
+## Aviso Legal
 
-> O desenvolvimento da ferramenta **BANKAI** tem fins estritamente educacionais, de investigação académica e de testes de intrusão autorizados. O autor não assume qualquer responsabilidade por utilizações indevidas, danos causados a sistemas de terceiros ou infrações legais decorrentes do uso deste software. Utiliza apenas em redes e sistemas sobre os quais possuas permissão expressa.
+> **A BANKAI destina-se exclusivamente a fins educacionais, de investigação académica e de testes de intrusão autorizados.**
+>
+> O autor não assume qualquer responsabilidade por utilizações indevidas, danos causados a sistemas de terceiros ou infrações legais decorrentes do uso deste software. Utiliza-a apenas em redes e sistemas sobre os quais possuas **permissão expressa e por escrito**.
 
 ---
 
 ## Licença
 
-Este projeto está distribuído sob a licença [MIT](https://www.google.com/search?q=LICENSE). Podes consultar o ficheiro de licença para mais detalhes.
+Distribuído sob a licença **MIT**. Consulta o ficheiro [LICENSE](LICENSE) para mais detalhes.
 
-```
+---
 
-```
+## Autor
+
+**Manuel Sadi Kufika**
